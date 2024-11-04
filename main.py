@@ -22,16 +22,20 @@ target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 target_speed_x = random.choice([-1, 1])
 target_speed_y = random.choice([-1, 1])
 
-# Цвет мишени
-target_color = (255, 0, 0)  # Начальный цвет мишени
+# Генерируем случайный цвет фона
+background_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+
 
 # Счетчик попаданий
 score = 0
 font = pygame.font.Font(None, 36)
 
+
 running = True
 while running:
-    screen.fill((255, 255, 255))  # Фон игры
+    # Фон игры
+    screen.fill(background_color)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -55,7 +59,7 @@ while running:
         target_speed_y *= -1
 
     # Рисуем мишень
-    pygame.draw.rect(screen, target_color, (target_x, target_y, target_width, target_height))
+    screen.blit(target_img, (target_x, target_y))
 
     # Отображаем счетчик попаданий
     score_text = font.render(f"Счет: {score}", True, (0, 0, 0))
